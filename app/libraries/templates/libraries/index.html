@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'libraries/styles.css' %}">
+  <title>Bibliographic Catalogue</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Bibliographic Catalogue</h1>
+    <div class="search-section">
+      <h2>Enter the search criteria(s)</h2>
+      <form id="search-form" action="/search/" method="GET">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="author" placeholder="Author">
+        <input type="text" name="subject" placeholder="Subject">
+        <input type="text" name="year" placeholder="Year">
+        <input type="text" name="language" placeholder="Language">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

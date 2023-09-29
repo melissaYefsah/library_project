@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <link rel="stylesheet" href="{% static 'libraries/styles.css' %}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Search Results</h1>
+
+    <h2>Search Criteria:</h2>
+    <p>Title: {{ title }}</p>
+    <p>Author: {{ author }}</p>
+    <p>Subject: {{ subject }}</p>
+    <p>Year: {{ year }}</p>
+    <p>Language: {{ language }}</p>
+
+    <!-- Display search results here -->
+    <h2>Search Results:</h2>
+    <ul>
+      {% for book in books %}
+      <li>The book {{ book.title }} you search is available written by {{ book.author }}</li>
+      {% endfor %}
+    </ul>
+
+
+  </div>
+</body>
+
+</html>
