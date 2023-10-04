@@ -23,12 +23,14 @@
     <!-- Display search results here -->
     <h2>Search Results:</h2>
     <ul>
+      {% if books %}
       {% for book in books %}
-      <li>The book {{ book.title }} you search is available written by {{ book.author }}</li>
+      <li>The book {{ book.title }} you searched for is available, written by {{ book.author }}</li>
       {% endfor %}
+      {% else %}
+      <li>The book you are looking for is not available in our library.</li>
+      {% endif %}
     </ul>
-
-
   </div>
 </body>
 

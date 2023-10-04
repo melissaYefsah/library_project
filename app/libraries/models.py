@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100)
     email = models.EmailField()
+    password = models.CharField(max_length=100)
     # Assuming limited user types like 'Student', 'Faculty', etc.
     user_type = models.CharField(max_length=20)
 
@@ -54,3 +56,5 @@ class Consults(models.Model):
 class AssociatesWith(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE)
+
+

@@ -4,12 +4,43 @@ from rest_framework import status
 from .models import User, Book, Keyword, Research, ResearchBook
 from .serializers import UserSerializer, BookSerializer, KeywordSerializer, ResearchSerializer, ResearchBookSerializer
 from django.shortcuts import render
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.forms import AuthenticationForm
+# allow the user to login before making a research
+def login_views(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                print('User authenticated:', user)
+                return redirect('index')
+            else:
+                messages.error(request, 'Invalid credentials. Please try again.')
+                print('Authentication failed for user:', username)
+        else:
+            messages.error(request, 'Form validation failed.')
+            print('Form validation failed:', form.errors)
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'libraries/login.html', {'form': form})
 
 
 
 
 def index(request):
     return render(request, 'libraries/index.html')
+
 
 @api_view(['GET'])
 def search_view(request):
@@ -80,3 +111,7 @@ def search_research_by_language(request, language):
     # pylint: enable=no-member
     serializer = ResearchBookSerializer(research_books, many=True)
     return Response(serializer.data)
+
+ 
+    
+

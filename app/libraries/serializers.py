@@ -5,7 +5,7 @@ from .models import User, Book, Keyword, Research, ResearchBook, BookKeyword, Co
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_id', 'username', 'email', 'user_type')
+        fields = ('user_id', 'username', 'email','password', 'user_type')
 
 
 class BookSerializer(serializers.ModelSerializer):
